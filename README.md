@@ -1,0 +1,2 @@
+# SO2RTweaks
+Tweaks for STAR OCEAN THE SECOND STORY R.
