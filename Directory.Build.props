@@ -1,0 +1,11 @@
+<Project>
+  <!-- See https://aka.ms/dotnet/msbuild/customize for more details on customizing your build -->
+  <PropertyGroup>
+    <IntDir>$(SolutionDir).build\$(Configuration)\$(MSBuildProjectName)\</IntDir>
+    <OutDir>$(SolutionDir).bin\$(Configuration)\\$(MSBuildProjectName)\</OutDir>
+    <PublishDir>$(SolutionDir).publish\$(Platform)\</PublishDir>
+    <MSBuildProjectExtensionsPath>$(IntDir)</MSBuildProjectExtensionsPath>
+    <IntermediateOutputPath>$(IntDir)</IntermediateOutputPath>
+    <OutputPath>$(OutDir)</OutputPath>
+  </PropertyGroup>
+</Project>
