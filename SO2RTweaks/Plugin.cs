@@ -57,7 +57,7 @@ namespace SO2RTweaks
 
                 _ = FrameRateLimitPatch.SetFrameRateLimitAsync();
 
-                Log.LogInfo("Applied frame rate limit patch.");
+                Log.LogInfo("Applied framerate limit patch.");
             }
         }
     }
