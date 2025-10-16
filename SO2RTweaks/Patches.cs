@@ -15,34 +15,34 @@ namespace SO2RTweaks
 
         [HarmonyPatch(typeof(GameSceneManager), nameof(GameSceneManager.CreateNextScene))]
         [HarmonyPrefix]
-        public static void CreateNextScene(ref SceneType nextSceneType)
+        public static void CreateNextScene(ref SceneType sceneType)
         {
-            if (nextSceneType == SceneType.Logo)
+            if (sceneType == SceneType.Logo)
             {
                 if (bSkipLogos.Value && !bSkippedIntroLogos)
                 {
                     if (bSkipOpeningMovie.Value)
                     {
                         // Logos + Opening Movie
-                        nextSceneType = SceneType.Title;
+                        sceneType = SceneType.Title;
 
                         bSkippedIntroOpeningMovie = true;
                     }
                     else
                     {
                         // Only Logos
-                        nextSceneType = SceneType.OpeningMovie;
+                        sceneType = SceneType.OpeningMovie;
                     }
 
                     bSkippedIntroLogos = true;
                 }
             }
-            else if (nextSceneType == SceneType.OpeningMovie)
+            else if (sceneType == SceneType.OpeningMovie)
             {
                 if (bSkipOpeningMovie.Value && !bSkippedIntroOpeningMovie)
                 {
                     // Only Opening Movie
-                    nextSceneType = SceneType.Title;
+                    sceneType = SceneType.Title;
 
                     bSkippedIntroOpeningMovie = true;
                 }
