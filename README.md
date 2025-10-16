@@ -1,7 +1,7 @@
 # SO2RTweaks
 A BepInEx plugin for Star Ocean: The Second Story R.
 
-* Configurable run in background.
+* Run in background disabler.
 * Force specific controller button prompts (PS4, PS5, Switch, XBOX).
 * Skip intro.
 * Framerate unlocker.
