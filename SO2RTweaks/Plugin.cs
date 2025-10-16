@@ -44,6 +44,13 @@ namespace SO2RTweaks
             }
 
             // Patches
+            if (bSkipLogos.Value || bSkipOpeningMovie.Value)
+            {
+                HarmonyInstance.PatchAll(typeof(SkipIntroPatch));
+
+                Log.LogInfo("Applied skip intro patch.");
+            }
+
             if (iButtonPrompts.Value != EButtonPrompts.Auto)
             {
                 HarmonyInstance.PatchAll(typeof(ButtonPromptsPatch));

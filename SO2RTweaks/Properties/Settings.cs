@@ -7,12 +7,17 @@ internal class Settings
     public static ConfigEntry<ERunInBackground> iRunInBackground;
     public static ConfigEntry<EButtonPrompts> iButtonPrompts;
 
+    // SkipIntro
+    public static ConfigEntry<bool> bSkipLogos;
+    public static ConfigEntry<bool> bSkipOpeningMovie;
+
     // Graphics
     public static ConfigEntry<int> iFrameRateLimit;
     public static ConfigEntry<int> iAnisotropicFiltering;
 
     public static void Load()
     {
+        // General
         iRunInBackground = Plugin.Config.Bind(
             "General",
             "RunInBackground",
@@ -27,6 +32,22 @@ internal class Settings
             "Button prompts you want to use."
         );
 
+        // SkipIntro
+        bSkipLogos = Plugin.Config.Bind(
+            "SkipIntro",
+            "SkipLogos",
+            false,
+            "Skip intro logos."
+        );
+
+        bSkipOpeningMovie = Plugin.Config.Bind(
+            "SkipIntro",
+            "SkipOpeningMovie",
+            false,
+            "Skip intro opening movie."
+        );
+
+        // Graphics
         iFrameRateLimit = Plugin.Config.Bind(
             "Graphics",
             "FrameRateLimit",
@@ -46,6 +67,8 @@ internal class Settings
         Plugin.Log.LogInfo($"RunInBackground: {iRunInBackground.Value}");
         Plugin.Log.LogInfo($"ButtonPrompts: {iButtonPrompts.Value}");
         Plugin.Log.LogInfo($"FrameRateLimit: {iFrameRateLimit.Value}");
+        Plugin.Log.LogInfo($"SkipLogos: {bSkipLogos.Value}");
+        Plugin.Log.LogInfo($"SkipOpeningMovie: {bSkipOpeningMovie.Value}");
         Plugin.Log.LogInfo($"AnisotropicFiltering: {iAnisotropicFiltering.Value}");
         Plugin.Log.LogInfo("----------------------");
     }

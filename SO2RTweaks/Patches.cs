@@ -3,11 +3,53 @@ using Common;
 using HarmonyLib;
 using UnityEngine;
 using System.Threading.Tasks;
-using static Common.InputManager;
 using static Settings;
+using static Common.InputManager;
 
 namespace SO2RTweaks
 {
+    internal class SkipIntroPatch
+    {
+        private static bool bSkippedIntroLogos = false;
+        private static bool bSkippedIntroOpeningMovie = false;
+
+        [HarmonyPatch(typeof(GameSceneManager), nameof(GameSceneManager.CreateNextScene))]
+        [HarmonyPrefix]
+        public static void CreateNextScene(ref SceneType nextSceneType)
+        {
+            if (nextSceneType == SceneType.Logo)
+            {
+                if (bSkipLogos.Value && !bSkippedIntroLogos)
+                {
+                    if (bSkipOpeningMovie.Value)
+                    {
+                        // Logos + Opening Movie
+                        nextSceneType = SceneType.Title;
+
+                        bSkippedIntroOpeningMovie = true;
+                    }
+                    else
+                    {
+                        // Only Logos
+                        nextSceneType = SceneType.OpeningMovie;
+                    }
+
+                    bSkippedIntroLogos = true;
+                }
+            }
+            else if (nextSceneType == SceneType.OpeningMovie)
+            {
+                if (bSkipOpeningMovie.Value && !bSkippedIntroOpeningMovie)
+                {
+                    // Only Opening Movie
+                    nextSceneType = SceneType.Title;
+
+                    bSkippedIntroOpeningMovie = true;
+                }
+            }
+        }
+    }
+
     internal class ButtonPromptsPatch
     {
         [HarmonyPatch(typeof(InputManager), nameof(InputManager.GetGamepadType))]
@@ -20,15 +62,15 @@ namespace SO2RTweaks
 
     internal class FrameRateLimitPatch
     {
-        private static volatile bool _isInitialized = false;
+        private static volatile bool bGetFrameRateInitialized = false;
 
         [HarmonyPatch(typeof(SystemConfigParameter), nameof(SystemConfigParameter.GetFrameRate))]
         [HarmonyPostfix]
         public static void GetFrameRate()
         {
-            if (!_isInitialized)
+            if (!bGetFrameRateInitialized)
             {
-                _isInitialized = true;
+                bGetFrameRateInitialized = true;
             }
             else
             {
@@ -52,7 +94,7 @@ namespace SO2RTweaks
 
         public static async Task SetFrameRateLimitAsync()
         {
-            while (!_isInitialized)
+            while (!bGetFrameRateInitialized)
             {
                 await Task.Delay(100);
             }
