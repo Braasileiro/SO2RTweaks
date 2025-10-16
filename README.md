@@ -3,7 +3,8 @@ A BepInEx plugin for Star Ocean: The Second Story R.
 
 * Configurable run in background.
 * Force specific controller button prompts (PS4, PS5, Switch, XBOX).
-* Frame rate unlocker.
+* Skip intro.
+* Framerate unlocker.
 * Anisotropic filtering.
 
 ## Installation
