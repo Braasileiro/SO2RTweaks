@@ -46,23 +46,23 @@ namespace SO2RTweaks
             // Patches
             if (bSkipLogos.Value || bSkipOpeningMovie.Value)
             {
-                HarmonyInstance.PatchAll(typeof(SkipIntroPatch));
+                HarmonyInstance.PatchAll(typeof(Patches.SkipIntroPatch));
 
                 Log.LogInfo("Applied skip intro patch.");
             }
 
             if (iButtonPrompts.Value != EButtonPrompts.Auto)
             {
-                HarmonyInstance.PatchAll(typeof(ButtonPromptsPatch));
+                HarmonyInstance.PatchAll(typeof(Patches.ButtonPromptsPatch));
 
                 Log.LogInfo("Applied button prompts patch.");
             }
 
             if (iFrameRateLimit.Value > 0 || iFrameRateLimit.Value == -1)
             {
-                HarmonyInstance.PatchAll(typeof(FrameRateLimitPatch));
+                HarmonyInstance.PatchAll(typeof(Patches.FrameRateLimitPatch));
 
-                _ = FrameRateLimitPatch.SetFrameRateLimitAsync();
+                _ = Patches.FrameRateLimitPatch.SetFrameRateLimitAsync();
 
                 Log.LogInfo("Applied framerate limit patch.");
             }
