@@ -7,4 +7,6 @@ Copy the ones below to this folder.
 
 * `Assembly-CSharp.dll`
 * `Il2Cppmscorlib.dll`
+* `Unity.RenderPipelines.Core.Runtime.dll`
+* `Unity.RenderPipelines.Universal.Runtime.dll`
 * `UnityEngine.CoreModule.dll`

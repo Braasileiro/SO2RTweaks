@@ -39,8 +39,7 @@ namespace SO2RTweaks
                 QualitySettings.anisotropicFiltering = AnisotropicFiltering.ForceEnable;
                 Texture.SetGlobalAnisotropicFilteringLimits(iAnisotropicFiltering.Value, iAnisotropicFiltering.Value);
 
-                Log.LogInfo($"Anisotropic filtering mode set to '{QualitySettings.anisotropicFiltering}'.");
-                Log.LogInfo($"Anisotropic filtering level set to '{iAnisotropicFiltering.Value}'.");
+                Log.LogInfo($"Anisotropic filtering set to {iAnisotropicFiltering.Value}x ({QualitySettings.anisotropicFiltering}).");
             }
 
             // Patches
@@ -65,6 +64,20 @@ namespace SO2RTweaks
                 _ = Patches.FrameRateLimitPatch.SetFrameRateLimitAsync();
 
                 Log.LogInfo("Applied framerate limit patch.");
+            }
+
+            if (iPostProcessAA.Value != EPostProcessAA.None)
+            {
+                HarmonyInstance.PatchAll(typeof(Patches.PostProcessAAPatch));
+
+                Log.LogInfo("Applied post-process anti-aliasing patch.");
+            }
+
+            if (bDisableVignette.Value)
+            {
+                HarmonyInstance.PatchAll(typeof(Patches.DisableVignettePatch));
+
+                Log.LogInfo("Applied disable vignette patch.");
             }
         }
     }

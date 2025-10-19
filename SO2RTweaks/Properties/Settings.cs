@@ -14,6 +14,8 @@ internal class Settings
     // Graphics
     public static ConfigEntry<int> iFrameRateLimit;
     public static ConfigEntry<int> iAnisotropicFiltering;
+    public static ConfigEntry<EPostProcessAA> iPostProcessAA;
+    public static ConfigEntry<bool> bDisableVignette;
 
     public static void Load()
     {
@@ -63,6 +65,20 @@ internal class Settings
             new AcceptableValueRange<int>(0, 16))
         );
 
+        iPostProcessAA = Plugin.Config.Bind(
+            "Graphics",
+            "PostProcessAA",
+            EPostProcessAA.None,
+            "Post-process anti-aliasing method to use.\nBy default, the game only uses MSAA, which can be configured in the menu. This setting will add a post-processing method on top of MSAA.\nFXAA removes more jagged edges, but it is slightly more blurry.\nSMAA produces a sharper image."
+        );
+
+        bDisableVignette = Plugin.Config.Bind(
+            "Graphics",
+            "DisableVignette",
+            false,
+            "Disable vignette effect.\nVignette is a visual effect that darkens the corners of the screen."
+        );
+
         Plugin.Log.LogInfo("----------------------");
         Plugin.Log.LogInfo($"RunInBackground: {iRunInBackground.Value}");
         Plugin.Log.LogInfo($"ButtonPrompts: {iButtonPrompts.Value}");
@@ -70,6 +86,8 @@ internal class Settings
         Plugin.Log.LogInfo($"SkipLogos: {bSkipLogos.Value}");
         Plugin.Log.LogInfo($"SkipOpeningMovie: {bSkipOpeningMovie.Value}");
         Plugin.Log.LogInfo($"AnisotropicFiltering: {iAnisotropicFiltering.Value}");
+        Plugin.Log.LogInfo($"PostProcessAA: {iPostProcessAA.Value}");
+        Plugin.Log.LogInfo($"DisableVignette: {bDisableVignette.Value}");
         Plugin.Log.LogInfo("----------------------");
     }
 }
