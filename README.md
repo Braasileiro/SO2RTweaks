@@ -1,11 +1,13 @@
 # SO2RTweaks
 A BepInEx plugin for Star Ocean: The Second Story R.
 
-* Run in background disabler.
-* Force specific controller button prompts (PS4, PS5, Switch, XBOX).
-* Skip intro.
-* Framerate unlocker.
-* Anisotropic filtering.
+* Disable Run In Background.
+* Force Controller Button Prompts (PS4, PS5, Switch, XBOX).
+* Skip Intro.
+* Framerate Unlocker.
+* Anisotropic Filtering.
+* Post-Process Anti-Aliasing (FXAA, SMAA).
+* Disable Vignette.
 
 ## Installation
 * Download the [latest release](../../releases/latest).
@@ -21,7 +23,31 @@ A BepInEx plugin for Star Ocean: The Second Story R.
 ## Thanks
 [BepInEx](https://github.com/BepInEx/BepInEx)
 
-## Screenshots
+## Visual Comparisons
+
+### General
 |![](assets/img/so2r_framerate.png)|![](assets/img/so2r_switch_buttons.png)|
 |:-:|:-:|
-|Unlocked Framerate|Nintendo Switch Buttons|
+|Framerate Unlocker<br><small>To infinity and beyond!</small>|Nintendo Switch Buttons<br><small>With an XInput controller</small>|
+
+### Anisotropic Filtering
+* Look at the roof on the left and the textures further in the background.
+
+|![](assets/img/so2r_aniso_default.png)|![](assets/img/so2r_aniso_16x.png)|
+|:-:|:-:|
+|Not Forced 4x (Game Default)|Forced 16x|
+
+### Post-Process Anti-Aliasing
+* FXAA removes more jagged edges, but it is slightly more blurry.
+* SMAA produces a sharper image.
+
+|![](assets/img/so2r_msaa4x_fxaa.png)|![](assets/img/so2r_msaa4x_fxaa.png)|
+|:-:|:-:|
+|MSAA 4x + **FXAA**|MSAA 4x + **SMAA**|
+
+### Vignette
+* Vignette is a visual effect that darkens the corners of the screen.
+
+|![](assets/img/so2r_vignette_enabled.png)|![](assets/img/so2r_vignette_disabled.png)|
+|:-:|:-:|
+|Enabled (Game Default)|Disabled|
