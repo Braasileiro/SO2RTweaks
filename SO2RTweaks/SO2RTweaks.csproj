@@ -16,7 +16,7 @@
   <PropertyGroup>
     <RootNamespace>SO2RTweaks</RootNamespace>
     <Version>0.0.3</Version>
-    <AssemblyTitle>A BepInEx plugin for Star Ocean: The Second Story R.</AssemblyTitle>
+    <AssemblyTitle>This is a BepInEx plugin for Star Ocean: The Second Story R.</AssemblyTitle>
     <Company>I love Mahou Shoujo Lyrical Nanoha</Company>
     <Copyright>Brasileiro</Copyright>
   </PropertyGroup>
