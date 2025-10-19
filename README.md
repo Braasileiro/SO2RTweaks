@@ -1,6 +1,7 @@
 # SO2RTweaks
-A BepInEx plugin for Star Ocean: The Second Story R.
+This is a BepInEx plugin for **Star Ocean: The Second Story R** that adds a framerate unlocker, intro skip, button prompts and more.
 
+## Features
 * Disable Run In Background.
 * Force Controller Button Prompts (PS4, PS5, Switch, XBOX).
 * Skip Intro.
