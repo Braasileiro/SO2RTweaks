@@ -4,7 +4,7 @@ using BepInEx.Configuration;
 internal class Settings
 {
     // General
-    public static ConfigEntry<ERunInBackground> iRunInBackground;
+    public static ConfigEntry<bool> bRunInBackground;
     public static ConfigEntry<EButtonPrompts> iButtonPrompts;
 
     // SkipIntro
@@ -20,10 +20,10 @@ internal class Settings
     public static void Load()
     {
         // General
-        iRunInBackground = Plugin.Config.Bind(
+        bRunInBackground = Plugin.Config.Bind(
             "General",
             "RunInBackground",
-            ERunInBackground.Auto,
+            true,
             "The game runs in the background by default.\nYou can disable this if you wish."
         );
 
@@ -79,15 +79,15 @@ internal class Settings
             "Disable vignette effect.\nVignette is a visual effect that darkens the corners of the screen."
         );
 
-        Plugin.Log.LogInfo("----------------------");
-        Plugin.Log.LogInfo($"RunInBackground: {iRunInBackground.Value}");
+        Plugin.Log.LogInfo("------------------------");
+        Plugin.Log.LogInfo($"RunInBackground: {bRunInBackground.Value}");
         Plugin.Log.LogInfo($"ButtonPrompts: {iButtonPrompts.Value}");
-        Plugin.Log.LogInfo($"FrameRateLimit: {iFrameRateLimit.Value}");
         Plugin.Log.LogInfo($"SkipLogos: {bSkipLogos.Value}");
         Plugin.Log.LogInfo($"SkipOpeningMovie: {bSkipOpeningMovie.Value}");
+        Plugin.Log.LogInfo($"FrameRateLimit: {iFrameRateLimit.Value}");
         Plugin.Log.LogInfo($"AnisotropicFiltering: {iAnisotropicFiltering.Value}");
         Plugin.Log.LogInfo($"PostProcessAA: {iPostProcessAA.Value}");
         Plugin.Log.LogInfo($"DisableVignette: {bDisableVignette.Value}");
-        Plugin.Log.LogInfo("----------------------");
+        Plugin.Log.LogInfo("------------------------");
     }
 }

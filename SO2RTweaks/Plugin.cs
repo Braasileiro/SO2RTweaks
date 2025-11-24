@@ -26,17 +26,18 @@ namespace SO2RTweaks
 
             // Settings
             Settings.Load();
-            
-            if (iRunInBackground.Value != ERunInBackground.Auto)
-            {
-                Application.runInBackground = iRunInBackground.Value == ERunInBackground.Enabled;
 
-                Log.LogInfo($"Application run in background mode set to '{iRunInBackground.Value}'.");
+            if (!bRunInBackground.Value)
+            {
+                Application.runInBackground = false;
+
+                Log.LogInfo($"Application run in background disabled.");
             }
 
             if (iAnisotropicFiltering.Value > 0)
             {
                 QualitySettings.anisotropicFiltering = AnisotropicFiltering.ForceEnable;
+
                 Texture.SetGlobalAnisotropicFilteringLimits(iAnisotropicFiltering.Value, iAnisotropicFiltering.Value);
 
                 Log.LogInfo($"Anisotropic filtering set to {iAnisotropicFiltering.Value}x ({QualitySettings.anisotropicFiltering}).");

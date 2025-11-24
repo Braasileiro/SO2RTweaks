@@ -1,13 +1,6 @@
 using Common;
 using UnityEngine.Rendering.Universal;
 
-internal enum ERunInBackground
-{
-    Auto,
-    Enabled,
-    Disabled
-}
-
 internal enum EButtonPrompts
 {
     Auto = InputManager.GamepadType.Invalid,
