@@ -27,14 +27,14 @@ This is a BepInEx plugin for **Star Ocean: The Second Story R** that adds a fram
 ## Visual Comparisons
 
 ### General
-|![](assets/img/so2r_framerate.png)|![](assets/img/so2r_switch_buttons.png)|
+|![](.github/images/so2r_framerate.png)|![](.github/images/so2r_switch_buttons.png)|
 |:-:|:-:|
 |Framerate Unlocker<br><small>To infinity and beyond!</small>|Nintendo Switch Buttons<br><small>With an XInput controller</small>|
 
 ### Anisotropic Filtering
 * Look at the roof on the left and the textures further in the background.
 
-|![](assets/img/so2r_aniso_default.png)|![](assets/img/so2r_aniso_16x.png)|
+|![](.github/images/so2r_aniso_default.png)|![](.github/images/so2r_aniso_16x.png)|
 |:-:|:-:|
 |Not Forced 4x (Game Default)|Forced 16x|
 
@@ -42,13 +42,13 @@ This is a BepInEx plugin for **Star Ocean: The Second Story R** that adds a fram
 * FXAA removes more jagged edges, but it is slightly more blurry.
 * SMAA produces a sharper image.
 
-|![](assets/img/so2r_msaa4x_fxaa.png)|![](assets/img/so2r_msaa4x_fxaa.png)|
+|![](.github/images/so2r_msaa4x_fxaa.png)|![](.github/images/so2r_msaa4x_fxaa.png)|
 |:-:|:-:|
 |MSAA 4x + **FXAA**|MSAA 4x + **SMAA**|
 
 ### Vignette
 * Vignette is a visual effect that darkens the corners of the screen.
 
-|![](assets/img/so2r_vignette_enabled.png)|![](assets/img/so2r_vignette_disabled.png)|
+|![](.github/images/so2r_vignette_enabled.png)|![](.github/images/so2r_vignette_disabled.png)|
 |:-:|:-:|
 |Enabled (Game Default)|Disabled|
