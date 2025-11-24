@@ -27,28 +27,28 @@
 
   <ItemGroup>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\libs\BepInEx\interop\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\libs\BepInEx\interop\Assembly-CSharp-publicized.dll</HintPath>
       <Private>false</Private>
     </Reference>
 
     <Reference Include="Il2Cppmscorlib">
-      <HintPath>..\libs\BepInEx\interop\Il2Cppmscorlib.dll</HintPath>
+      <HintPath>..\libs\BepInEx\interop\Il2Cppmscorlib-publicized.dll</HintPath>
       <Private>false</Private>
     </Reference>
 
     <Reference Include="UnityEngine.CoreModule">
-        <HintPath>..\libs\BepInEx\interop\UnityEngine.CoreModule.dll</HintPath>
-        <Private>false</Private>
+      <HintPath>..\libs\BepInEx\interop\UnityEngine.CoreModule-publicized.dll</HintPath>
+      <Private>false</Private>
     </Reference>
 
     <Reference Include="Unity.RenderPipelines.Core.Runtime">
-        <HintPath>..\libs\BepInEx\interop\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
-        <Private>false</Private>
+      <HintPath>..\libs\BepInEx\interop\Unity.RenderPipelines.Core.Runtime-publicized.dll</HintPath>
+      <Private>false</Private>
     </Reference>
-    
+
     <Reference Include="Unity.RenderPipelines.Universal.Runtime">
-        <HintPath>..\libs\BepInEx\interop\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
-        <Private>false</Private>
+      <HintPath>..\libs\BepInEx\interop\Unity.RenderPipelines.Universal.Runtime-publicized.dll</HintPath>
+      <Private>false</Private>
     </Reference>
   </ItemGroup>
 </Project>

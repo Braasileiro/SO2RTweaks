@@ -652,4 +652,3 @@ $RECYCLE.BIN/
 
 # Custom
 .publish/
-libs/BepInEx/interop/*.dll
