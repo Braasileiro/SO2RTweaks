@@ -57,7 +57,7 @@ namespace SO2RTweaks
                 Log.LogInfo("Applied button prompts patch.");
             }
 
-            if (iFrameRateLimit.Value > 0 || iFrameRateLimit.Value == -1)
+            if (iFrameRateLimit.Value >= 0)
             {
                 HarmonyInstance.PatchAll(typeof(Patches.FrameRateLimitPatch));
 

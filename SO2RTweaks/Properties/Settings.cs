@@ -53,8 +53,8 @@ internal class Settings
         iFrameRateLimit = Plugin.Config.Bind(
             "Graphics",
             "FrameRateLimit",
-            0,
-            "Select an arbitrary framerate limit, ignoring the game setting.\nVSync must be disabled in-game.\nSetting this to '0' will use the game setting (fps cap or refresh rate cap when VSync is on).\nSetting this to '-1' effectively unlocks the framerate (when VSync is off)."
+            -1,
+            "Select an arbitrary framerate limit, ignoring the game setting.\nVSync must be disabled in-game.\nSetting this to '-1' will use the game setting (framerate cap or refresh rate cap when VSync is on).\nSetting this to '0' effectively unlocks the framerate (when VSync is off)."
         );
 
         iAnisotropicFiltering = Plugin.Config.Bind(

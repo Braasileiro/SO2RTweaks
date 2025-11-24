@@ -47,7 +47,14 @@ namespace SO2RTweaks.Patches
 
             Application.targetFrameRate = iFrameRateLimit.Value;
 
-            Plugin.Log.LogInfo($"Application target framerate set to {Application.targetFrameRate}.");
+            if (Application.targetFrameRate == 0)
+            {
+                Plugin.Log.LogInfo($"Application target framerate set to 0 (Unlimited).");
+            }
+            else
+            {
+                Plugin.Log.LogInfo($"Application target framerate set to {Application.targetFrameRate}.");
+            }
         }
     }
 }
