@@ -1,3 +1,4 @@
+using Game;
 using Common;
 using HarmonyLib;
 using static Settings;
@@ -8,6 +9,7 @@ namespace SO2RTweaks.Patches
     {
         private static bool bSkippedIntroLogos = false;
         private static bool bSkippedIntroOpeningMovie = false;
+        private static bool bSkippedTitlePresenter = false;
 
         [HarmonyPatch(typeof(GameSceneManager), nameof(GameSceneManager.CreateNextScene))]
         [HarmonyPrefix]
@@ -42,6 +44,19 @@ namespace SO2RTweaks.Patches
 
                     bSkippedIntroOpeningMovie = true;
                 }
+            }
+        }
+
+        [HarmonyPatch(typeof(UITitlePressAnyButtonSelector), nameof(UITitlePressAnyButtonSelector.Show))]
+        [HarmonyPostfix]
+        public static void PressAnyButtonSelectorShow(ref UITitlePressAnyButtonSelector __instance)
+        {
+            if (bSkipOpeningMovie.Value && !bSkippedTitlePresenter)
+            {
+                // Skip the short title animation on press any button screen
+                __instance.titlePresenter.Skip();
+
+                bSkippedTitlePresenter = true;
             }
         }
     }
