@@ -91,11 +91,11 @@ namespace SO2RTweaks
                 Log.LogInfo("Applied disable vignette patch.");
             }
 
-            if (fFieldCullingDistance.Value >= 0f)
+            if (fFieldGrassCullingDistance.Value > 0f)
             {
-                HarmonyInstance.PatchAll(typeof(Patches.FieldCullingPatch));
+                HarmonyInstance.PatchAll(typeof(Patches.FieldGrassCullingPatch));
 
-                Log.LogInfo("Applied field culling patch.");
+                Log.LogInfo("Applied field grass culling patch.");
             }
         }
 
