@@ -16,6 +16,7 @@ internal class Settings
     public static ConfigEntry<int> iAnisotropicFiltering;
     public static ConfigEntry<EPostProcessAA> iPostProcessAA;
     public static ConfigEntry<bool> bDisableVignette;
+    public static ConfigEntry<float> fFieldCullingDistance;
 
     public static void Load()
     {
@@ -79,6 +80,14 @@ internal class Settings
             "Disable vignette effect.\nVignette is a visual effect that darkens the corners of the screen."
         );
 
+        fFieldCullingDistance = Plugin.Config.Bind(
+            "Graphics",
+            "FieldCullingDistance",
+            300f,
+            new ConfigDescription($"Set the field bushes and plants culling distance.\nThe game uses a very low value, around 15 to 50 meters. This causes vegetation objects such as bushes and plants to disappear very close to the camera.\nSetting this value above 100 is already a good improvement, but I recommend leaving it at 300, which is enough for an experience without pop-ins and less chance of degrading performance.\nDon't forget to set the 'Cull Distance' option in the game to 'Farthest' for the best experience.\nThis setting does not affect the grass, which fade away smoothly as you walk away.\nSetting this to '0' will use the game setting.",
+            new AcceptableValueRange<float>(0f, 1000f))
+        );
+
         Plugin.Log.LogInfo("------------------------");
         Plugin.Log.LogInfo($"RunInBackground: {bRunInBackground.Value}");
         Plugin.Log.LogInfo($"ButtonPrompts: {iButtonPrompts.Value}");
@@ -88,6 +97,7 @@ internal class Settings
         Plugin.Log.LogInfo($"AnisotropicFiltering: {iAnisotropicFiltering.Value}");
         Plugin.Log.LogInfo($"PostProcessAA: {iPostProcessAA.Value}");
         Plugin.Log.LogInfo($"DisableVignette: {bDisableVignette.Value}");
+        Plugin.Log.LogInfo($"FieldCullingDistance: {fFieldCullingDistance.Value}");
         Plugin.Log.LogInfo("------------------------");
     }
 }

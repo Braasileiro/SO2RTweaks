@@ -1,9 +1,11 @@
+using System;
 using BepInEx;
 using HarmonyLib;
 using UnityEngine;
 using BepInEx.Logging;
 using BepInEx.Unity.IL2CPP;
 using BepInEx.Configuration;
+using UnityEngine.SceneManagement;
 using static Settings;
 
 namespace SO2RTweaks
@@ -11,9 +13,13 @@ namespace SO2RTweaks
     [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
     public class Plugin : BasePlugin
     {
+        // Instances
         internal static new ManualLogSource Log;
         internal static new ConfigFile Config;
         internal static Harmony HarmonyInstance;
+
+        // States
+        internal static bool IsSceneTransitioning { get; private set; } = false;
 
         public override void Load()
         {
@@ -26,6 +32,10 @@ namespace SO2RTweaks
 
             // Settings
             Settings.Load();
+
+            // Register events
+            SceneManager.sceneLoaded += (Action<Scene, LoadSceneMode>)OnSceneLoaded;
+            SceneManager.sceneUnloaded += (Action<Scene>)OnSceneUnloaded;
 
             if (!bRunInBackground.Value)
             {
@@ -80,6 +90,18 @@ namespace SO2RTweaks
 
                 Log.LogInfo("Applied disable vignette patch.");
             }
+
+            if (fFieldCullingDistance.Value >= 0f)
+            {
+                HarmonyInstance.PatchAll(typeof(Patches.FieldCullingPatch));
+
+                Log.LogInfo("Applied field culling patch.");
+            }
         }
+
+        // Events
+        private static void OnSceneLoaded(Scene scene, LoadSceneMode mode) => IsSceneTransitioning = false;
+
+        private static void OnSceneUnloaded(Scene scene) => IsSceneTransitioning = true;
     }
 }
