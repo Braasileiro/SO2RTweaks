@@ -25,11 +25,15 @@ namespace SO2RTweaks.Patches
                         sceneType = SceneType.Title;
 
                         bSkippedIntroOpeningMovie = true;
+
+                        Plugin.Log.LogInfo("Skipped logos and opening movie.");
                     }
                     else
                     {
                         // Only Logos
                         sceneType = SceneType.OpeningMovie;
+
+                        Plugin.Log.LogInfo("Skipped logos.");
                     }
 
                     bSkippedIntroLogos = true;
@@ -43,6 +47,8 @@ namespace SO2RTweaks.Patches
                     sceneType = SceneType.Title;
 
                     bSkippedIntroOpeningMovie = true;
+
+                    Plugin.Log.LogInfo("Skipped opening movie.");
                 }
             }
         }
@@ -57,6 +63,8 @@ namespace SO2RTweaks.Patches
                 __instance.titlePresenter.Skip();
 
                 bSkippedTitlePresenter = true;
+
+                Plugin.Log.LogInfo("Skipped the short title animation.");
             }
         }
     }
