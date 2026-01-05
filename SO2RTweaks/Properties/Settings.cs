@@ -85,7 +85,7 @@ internal class Settings
             "Graphics",
             "ShadowDistanceMultiplier",
             1,
-            new ConfigDescription($"Set the general shadow draw distance multiplier.\nThe game uses very low values, around 35 to 50 meters. This causes an effect similar to mesh swap pop-in, as objects stop receiving shadow rendering depending on distance.\nI recommend leaving the multiplier at 4. In my tests, this was more than enough to prevent shadows from disappearing from the camera view.\nDon't forget to tweak the 'FieldGrassCullingDistance' setting for the best experience.\nUsing a multiplier that is too high may cause performance degradation depending on your setup.\nSetting this to '1' will use the game setting.",
+            new ConfigDescription($"Set the general shadow draw distance multiplier.\nThe rendering distance for shadows in the game is quite low, around 35 to 50 meters. This causes an effect similar to mesh swap pop-in, as objects stop to render shadows depending on distance.\nI recommend leaving the multiplier at 4. In my tests, this was more than enough to prevent shadows from disappearing from the camera view.\nDon't forget to tweak the 'FieldGrassCullingDistance' setting for the best experience.\nUsing a multiplier that is too high may cause performance degradation depending on your setup.\nSetting this to '1' will use the game setting.",
             new AcceptableValueRange<int>(1, 8))
         );
 
