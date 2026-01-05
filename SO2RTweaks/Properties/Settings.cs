@@ -85,7 +85,7 @@ internal class Settings
             "Graphics",
             "ShadowDistanceMultiplier",
             1,
-            new ConfigDescription($"Set the general shadow draw distance multiplier.\nThe rendering distance for shadows in the game is quite low, around 35 to 50 meters. This causes an effect similar to mesh swap pop-in, as objects stop to render shadows depending on distance.\nI recommend leaving the multiplier at 2. This value will not significantly compromise the appearance of the shadows.\nAbove 2, shadows may appear softer where they would normally be more solid.\nDon't forget to tweak the 'FieldGrassCullingDistance' setting for the best experience.\nUsing a high multiplier may cause performance degradation depending on your setup.\nSetting this to '1' will use the game setting.",
+            new ConfigDescription($"Set the general shadow draw distance.\nThe rendering distance for shadows in the game is quite low, around 35 to 50 meters. This causes an effect similar to mesh swap pop-in, as objects stop to render shadows depending on distance.\nI recommend leaving the multiplier at 2. This value will not significantly compromise the appearance of the shadows.\nAbove 2, shadows may appear softer where they would normally be more solid.\nDon't forget to tweak the 'FieldGrassCullingDistance' setting for the best experience.\nUsing a high multiplier may cause performance degradation depending on your setup.\nSetting this to '1' will use the game setting.",
             new AcceptableValueRange<int>(1, 4))
         );
 
@@ -93,7 +93,7 @@ internal class Settings
             "Graphics",
             "FieldGrassCullingDistance",
             0f,
-            new ConfigDescription($"Set the field bushes and plants culling distance.\nThe game uses a very low value, around 15 to 50 meters. This causes vegetation objects such as bushes and plants to disappear very close to the camera.\nI recommend leaving the value at 300. In my tests, this was more than enough to stop objects from popping in.\nDon't forget to set the 'Cull Distance' option in the game to 'Farthest' for the best experience.\nThis setting does not affect the terrain grass, which fade away smoothly as you walk away.\nUsing a value that is too high may cause performance degradation depending on your setup.\nSetting this to '0' will use the game setting.",
+            new ConfigDescription($"Set the field bushes and plants culling distance.\nThe game uses a very low value, around 15 to 50 meters. This causes vegetation objects such as bushes and plants to disappear very close to the camera.\nI recommend leaving the value at 300. In my tests, this was more than enough to stop objects from popping in.\nDon't forget to set the 'Cull Distance' option in the game to 'Farthest' for the best experience.\nThis setting does not affect the terrain grass, which fade away smoothly as you walk away.\nUsing a high value may cause performance degradation depending on your setup.\nSetting this to '0' will use the game setting.",
             new AcceptableValueRange<float>(0f, 1000f))
         );
 
