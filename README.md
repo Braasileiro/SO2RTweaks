@@ -77,7 +77,7 @@ This is a BepInEx plugin for **Star Ocean: The Second Story R** that adds a fram
 
 |![](.github/images/so2r_culling_default.png)|![](.github/images/so2r_culling_300.png)|![](.github/images/so2r_culling_300_shadowdist_4x.png)|
 |:-:|:-:|:-:|
-|Game Default<br>ShadowDistanceMultiplier 1x (Game Default)|FieldGrassCullingDistance 300<br>ShadowDistanceMultiplier 1x (Game Default)|FieldGrassCullingDistance 300<br>ShadowDistanceMultiplier 4x|
+|Game Default<br>ShadowDistanceMultiplier 1x|FieldGrassCullingDistance **300**<br>ShadowDistanceMultiplier 1x|FieldGrassCullingDistance **300**<br>ShadowDistanceMultiplier **4x**|
 
 ### Vignette
 * Vignette is a visual effect that darkens the corners of the screen.
