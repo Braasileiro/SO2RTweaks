@@ -61,23 +61,25 @@ This is a BepInEx plugin for **Star Ocean: The Second Story R** that adds a fram
 > [!IMPORTANT]
 > This setting does not affect the terrain grass, which fade away smoothly as you walk away.
 >
-> Using a value that is too high may cause performance degradation depending on your setup.
+> Using a high value may cause performance degradation depending on your setup.
 
 * The `ShadowDistanceMultiplier` setting controls the general shadow distance multiplier.
   
 > [!NOTE]
 > The rendering distance for shadows in the game is quite low, around 35 to 50 meters. This causes an effect similar to mesh swap pop-in, as objects stop to render shadows depending on distance.
 >
-> I recommend leaving the multiplier at 4. In my tests, this was more than enough to prevent shadows from disappearing from the camera view.
+> I recommend leaving the multiplier at 2. This value will not significantly compromise the appearance of the shadows.
 >
 > Recommended for use in conjunction with the `FieldGrassCullingDistance` setting for the best experience.
 
 > [!IMPORTANT]
-> Using a multiplier that is too high may cause performance degradation depending on your setup.
+> Above 2, shadows may appear softer where they would normally be more defined.
+> 
+> Using a high multiplier may cause performance degradation depending on your setup.
 
-|![](.github/images/so2r_culling_default.png)|![](.github/images/so2r_culling_300.png)|![](.github/images/so2r_culling_300_shadowdist_4x.png)|
+|![](.github/images/so2r_culling_default.png)|![](.github/images/so2r_culling_300.png)|![](.github/images/so2r_culling_300_shadowdist_2x.png)|
 |:-:|:-:|:-:|
-|Game Default<br>ShadowDistanceMultiplier 1x|FieldGrassCullingDistance **300**<br>ShadowDistanceMultiplier 1x|FieldGrassCullingDistance **300**<br>ShadowDistanceMultiplier **4x**|
+|Game Default<br>ShadowDistanceMultiplier 1x|FieldGrassCullingDistance **300**<br>ShadowDistanceMultiplier 1x|FieldGrassCullingDistance **300**<br>ShadowDistanceMultiplier **2x**|
 
 ### Vignette
 * Vignette is a visual effect that darkens the corners of the screen.
