@@ -8,6 +8,8 @@ This is a BepInEx plugin for **Star Ocean: The Second Story R** that adds a fram
 * Framerate Unlocker.
 * Anisotropic Filtering.
 * Post-Process Anti-Aliasing (FXAA, SMAA).
+* Shadow Distance Multiplier.
+* Field Pop-in Reduction.
 * Disable Vignette.
 
 ## Installation
@@ -45,6 +47,39 @@ This is a BepInEx plugin for **Star Ocean: The Second Story R** that adds a fram
 |![](.github/images/so2r_msaa4x_fxaa.png)|![](.github/images/so2r_msaa4x_fxaa.png)|
 |:-:|:-:|
 |MSAA 4x + **FXAA**|MSAA 4x + **SMAA**|
+
+### Field Grass Culling and Shadow Distance
+* The `FieldGrassCulling` setting controls the distance that bushes and plants will continue to be rendered on screen. It is a separate system from the `Cull Distance` in the game options.
+
+> [!NOTE]
+> The game uses a very low value, around 15 to 50 meters. This causes vegetation objects such as bushes and plants to disappear very close to the camera.
+>
+> I recommend leaving the value at 300. In my tests, this was more than enough to stop objects from popping in.
+>
+> Don't forget to set the `Cull Distance` option in the game to `Farthest` for the best experience.
+
+> [!IMPORTANT]
+> This setting does not affect the terrain grass, which fade away smoothly as you walk away.
+>
+> Using a high value may cause performance degradation depending on your setup.
+
+* The `ShadowDistanceMultiplier` setting controls the general shadow distance multiplier.
+  
+> [!NOTE]
+> The rendering distance for shadows in the game is quite low, around 35 to 50 meters. This causes an effect similar to mesh swap pop-in, as objects stop to render shadows depending on distance.
+>
+> I recommend leaving the multiplier at 2. This value will not significantly compromise the appearance of the shadows.
+>
+> Recommended for use in conjunction with the `FieldGrassCullingDistance` setting for the best experience.
+
+> [!IMPORTANT]
+> Above 2, shadows may appear softer where they would normally be more defined.
+> 
+> Using a high multiplier may cause performance degradation depending on your setup.
+
+|![](.github/images/so2r_culling_default.png)|![](.github/images/so2r_culling_300.png)|![](.github/images/so2r_culling_300_shadowdist_2x.png)|
+|:-:|:-:|:-:|
+|Game Default<br>ShadowDistanceMultiplier 1x|FieldGrassCullingDistance **300**<br>ShadowDistanceMultiplier 1x|FieldGrassCullingDistance **300**<br>ShadowDistanceMultiplier **2x**|
 
 ### Vignette
 * Vignette is a visual effect that darkens the corners of the screen.
