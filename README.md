@@ -70,7 +70,7 @@ This is a BepInEx plugin for **Star Ocean: The Second Story R** that adds a fram
 >
 > I recommend leaving the multiplier at 4. In my tests, this was more than enough to prevent shadows from disappearing from the camera view.
 >
-> Recommended for use in conjunction with the `FieldGrassCullingDistance` option setting for the best experience.
+> Recommended for use in conjunction with the `FieldGrassCullingDistance` setting for the best experience.
 
 > [!IMPORTANT]
 > Using a multiplier that is too high may cause performance degradation depending on your setup.
