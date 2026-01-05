@@ -85,8 +85,8 @@ internal class Settings
             "Graphics",
             "ShadowDistanceMultiplier",
             1,
-            new ConfigDescription($"Set the general shadow draw distance multiplier.\nThe rendering distance for shadows in the game is quite low, around 35 to 50 meters. This causes an effect similar to mesh swap pop-in, as objects stop to render shadows depending on distance.\nI recommend leaving the multiplier at 4. In my tests, this was more than enough to prevent shadows from disappearing from the camera view.\nDon't forget to tweak the 'FieldGrassCullingDistance' setting for the best experience.\nUsing a multiplier that is too high may cause performance degradation depending on your setup.\nSetting this to '1' will use the game setting.",
-            new AcceptableValueRange<int>(1, 8))
+            new ConfigDescription($"Set the general shadow draw distance multiplier.\nThe rendering distance for shadows in the game is quite low, around 35 to 50 meters. This causes an effect similar to mesh swap pop-in, as objects stop to render shadows depending on distance.\nI recommend leaving the multiplier at 2. This value will not significantly compromise the appearance of the shadows.\nAbove 2, shadows may appear softer where they would normally be more solid.\nDon't forget to tweak the 'FieldGrassCullingDistance' setting for the best experience.\nUsing a high multiplier may cause performance degradation depending on your setup.\nSetting this to '1' will use the game setting.",
+            new AcceptableValueRange<int>(1, 4))
         );
 
         fFieldGrassCullingDistance = Plugin.Config.Bind(
