@@ -48,7 +48,7 @@ This is a BepInEx plugin for **Star Ocean: The Second Story R** that adds a fram
 |:-:|:-:|
 |MSAA 4x + **FXAA**|MSAA 4x + **SMAA**|
 
-### Field Grass Culling and Shadows Distance
+### Field Grass Culling and Shadow Distance
 * The `FieldGrassCulling` setting controls the distance that bushes and plants will continue to be rendered on screen. It is a separate system from the `Cull Distance` in the game options.
 
 > [!NOTE]
