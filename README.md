@@ -48,6 +48,25 @@ This is a BepInEx plugin for **Star Ocean: The Second Story R** that adds a fram
 |:-:|:-:|
 |MSAA 4x + **FXAA**|MSAA 4x + **SMAA**|
 
+### Field Grass Culling
+* The `FieldGrassCulling` setting controls the distance that bushes and plants will continue to be rendered on screen. It is a separate system from the `Cull Distance` in the game options.
+
+> [!NOTE]
+> The game uses a very low value, around 15 to 50 meters. This causes vegetation objects such as bushes and plants to disappear very close to the camera.
+>
+> I recommend leaving the value at **300**. In my tests, this was more than enough to stop objects from popping in.
+>
+> Don't forget to set the `Cull Distance` option in the game to `Farthest` for the best experience.
+
+> [!IMPORTANT]
+> This setting does not affect the terrain grass, which fade away smoothly as you walk away.
+>
+> Using a high value may cause performance degradation depending on your setup.
+
+|![](.github/images/so2r_culling_default.png)|![](.github/images/so2r_culling_300.png)|
+|:-:|:-:|
+|15~50m (Game Default)|300m|
+
 ### Shadow Distance Multiplier
 * The `ShadowDistanceMultiplier` setting controls the general shadow draw distance and enables 4 shadow cascades.
 
@@ -68,25 +87,6 @@ This is a BepInEx plugin for **Star Ocean: The Second Story R** that adds a fram
 |![](.github/images/so2r_shadows_2x.png)|![](.github/images/so2r_shadows_4x.png)|
 |:-:|:-:|
 |2x|4x|
-
-### Field Grass Culling
-* The `FieldGrassCulling` setting controls the distance that bushes and plants will continue to be rendered on screen. It is a separate system from the `Cull Distance` in the game options.
-
-> [!NOTE]
-> The game uses a very low value, around 15 to 50 meters. This causes vegetation objects such as bushes and plants to disappear very close to the camera.
->
-> I recommend leaving the value at **300**. In my tests, this was more than enough to stop objects from popping in.
->
-> Don't forget to set the `Cull Distance` option in the game to `Farthest` for the best experience.
-
-> [!IMPORTANT]
-> This setting does not affect the terrain grass, which fade away smoothly as you walk away.
->
-> Using a high value may cause performance degradation depending on your setup.
-
-|![](.github/images/so2r_culling_default.png)|![](.github/images/so2r_culling_300.png)|
-|:-:|:-:|
-|15~50m (Game Default)|300m|
 
 ### Vignette
 * Vignette is a visual effect that darkens the corners of the screen.
