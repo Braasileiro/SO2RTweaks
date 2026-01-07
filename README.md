@@ -60,6 +60,7 @@ This is a BepInEx plugin for **Star Ocean: The Second Story R** that adds a fram
 
 > [!IMPORTANT]
 > At **2x**, shadows will be sharper up close, but it doesn't cover a large area.
+>
 > At **4x**, you get a smoother result, but it covers a large area. I think it's worth the tradeoff.
 > 
 > May impact performance depending on your configuration.
