@@ -61,7 +61,7 @@ This is a BepInEx plugin for **Star Ocean: The Second Story R** that adds a fram
 > [!IMPORTANT]
 > This setting does not affect the terrain grass, which fade away smoothly as you walk away.
 >
-> Using a high value may cause performance degradation depending on your setup.
+> Using a high value may impact performance depending on your configuration.
 
 |![](.github/images/so2r_culling_default.png)|![](.github/images/so2r_culling_300.png)|
 |:-:|:-:|
