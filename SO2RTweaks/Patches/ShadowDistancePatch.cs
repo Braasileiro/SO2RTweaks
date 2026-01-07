@@ -52,7 +52,7 @@ namespace SO2RTweaks.Patches
         }
 
         [HarmonyPatch(typeof(GameRenderManager), nameof(GameRenderManager.SetShadowDistance))]
-        [HarmonyPrefix]
+        [HarmonyPostfix]
         public static void SetShadowDistancePostfix(ref float shadowDistance)
         {
             var asset = GameRenderManager.PipelineAsset;
