@@ -19,8 +19,8 @@ internal class Settings
     public static ConfigEntry<int> iAnisotropicFiltering;
     public static ConfigEntry<EPostProcessAA> iPostProcessAA;
     public static ConfigEntry<bool> bDisableVignette;
-    public static ConfigEntry<int> iShadowDistanceMultiplier;
     public static ConfigEntry<float> fFieldGrassCullingDistance;
+    public static ConfigEntry<int> iShadowDistanceMultiplier;
 
     public static void Load()
     {
@@ -94,6 +94,21 @@ internal class Settings
             "Vignette is a visual effect that darkens the corners of the screen."
         );
 
+        fFieldGrassCullingDistance = Plugin.Config.Bind(
+            "Graphics",
+            "FieldGrassCullingDistance",
+            0f,
+            new ConfigDescription(
+                "Set the field bushes and plants culling distance.\n" +
+                "The game uses a very low value, around 15 to 50 meters. This causes vegetation objects such as bushes and plants to disappear very close to the camera.\n" +
+                "I recommend leaving the value at 300. In my tests, this was more than enough to stop objects from popping in.\n" +
+                "Don't forget to set the 'Cull Distance' option in the game to 'Farthest' for the best experience.\n" +
+                "This setting does not affect the terrain grass, which fade away smoothly as you walk away.\n" +
+                "Using a high value may impact performance depending on your configuration.\n" +
+                "Setting this to '0' will use the game setting.",
+            new AcceptableValueRange<float>(0f, 1000f))
+        );
+
         iShadowDistanceMultiplier = Plugin.Config.Bind(
             "Graphics",
             "ShadowDistanceMultiplier",
@@ -110,21 +125,6 @@ internal class Settings
             new AcceptableValueRange<int>(1, MaxShadowDistanceMultiplier))
         );
 
-        fFieldGrassCullingDistance = Plugin.Config.Bind(
-            "Graphics",
-            "FieldGrassCullingDistance",
-            0f,
-            new ConfigDescription(
-                "Set the field bushes and plants culling distance.\n" +
-                "The game uses a very low value, around 15 to 50 meters. This causes vegetation objects such as bushes and plants to disappear very close to the camera.\n" +
-                "I recommend leaving the value at 300. In my tests, this was more than enough to stop objects from popping in.\n" +
-                "Don't forget to set the 'Cull Distance' option in the game to 'Farthest' for the best experience.\n" +
-                "This setting does not affect the terrain grass, which fade away smoothly as you walk away.\n" +
-                "Using a high value may impact performance depending on your configuration.\n" +
-                "Setting this to '0' will use the game setting.",
-            new AcceptableValueRange<float>(0f, 1000f))
-        );
-
         Plugin.Log.LogInfo("------------------------");
         Plugin.Log.LogInfo($"RunInBackground: {bRunInBackground.Value}");
         Plugin.Log.LogInfo($"ButtonPrompts: {iButtonPrompts.Value}");
@@ -134,8 +134,8 @@ internal class Settings
         Plugin.Log.LogInfo($"AnisotropicFiltering: {iAnisotropicFiltering.Value}");
         Plugin.Log.LogInfo($"PostProcessAA: {iPostProcessAA.Value}");
         Plugin.Log.LogInfo($"DisableVignette: {bDisableVignette.Value}");
-        Plugin.Log.LogInfo($"ShadowDistanceMultiplier: {iShadowDistanceMultiplier.Value}");
         Plugin.Log.LogInfo($"FieldGrassCullingDistance: {fFieldGrassCullingDistance.Value}");
+        Plugin.Log.LogInfo($"ShadowDistanceMultiplier: {iShadowDistanceMultiplier.Value}");
         Plugin.Log.LogInfo("------------------------");
     }
 }
