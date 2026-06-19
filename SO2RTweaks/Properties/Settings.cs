@@ -6,8 +6,6 @@ internal class Settings
     // General
     public static ConfigEntry<bool> bRunInBackground;
     public static ConfigEntry<EButtonPrompts> iButtonPrompts;
-
-    // SkipIntro
     public static ConfigEntry<bool> bSkipLogos;
     public static ConfigEntry<bool> bSkipOpeningMovie;
 
@@ -37,7 +35,6 @@ internal class Settings
             "Button prompts you want to use."
         );
 
-        // SkipIntro
         bSkipLogos = Plugin.Config.Bind(
             "General",
             "SkipLogos",
