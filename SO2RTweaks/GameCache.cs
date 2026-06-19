@@ -4,6 +4,8 @@ namespace SO2RTweaks;
 
 internal static class GameCache
 {
+    public static bool IsSceneTransitioning = false;
+
     private static Camera _mainCamera;
 
     public static Camera GetMainCamera()

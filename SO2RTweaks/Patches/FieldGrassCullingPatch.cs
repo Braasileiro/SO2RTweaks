@@ -20,7 +20,7 @@ internal class FieldGrassCullingPatch
     private static bool CanPatch(FieldCullingBase instance)
     {
         // Security checks
-        if (Plugin.IsSceneTransitioning || instance == null || instance.gameObject == null)
+        if (GameCache.IsSceneTransitioning || instance == null || instance.gameObject == null)
         {
             return false;
         }

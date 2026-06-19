@@ -18,9 +18,6 @@ public class Plugin : BasePlugin
     internal static new ConfigFile Config;
     internal static Harmony HarmonyInstance;
 
-    // States
-    internal static bool IsSceneTransitioning { get; private set; } = false;
-
     public override void Load()
     {
         // Globals
@@ -107,7 +104,13 @@ public class Plugin : BasePlugin
     }
 
     // Events
-    private static void OnSceneLoaded(Scene scene, LoadSceneMode mode) => IsSceneTransitioning = false;
+    private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        GameCache.IsSceneTransitioning = false;
+    }
 
-    private static void OnSceneUnloaded(Scene scene) => IsSceneTransitioning = true;
+    private static void OnSceneUnloaded(Scene scene)
+    {
+        GameCache.IsSceneTransitioning = true;
+    }
 }
