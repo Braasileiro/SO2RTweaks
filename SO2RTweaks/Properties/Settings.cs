@@ -3,9 +3,6 @@ using BepInEx.Configuration;
 
 internal class Settings
 {
-    public const int MinShadowDistanceMultiplier = 2;
-    public const int MaxShadowDistanceMultiplier = 4;
-
     // General
     public static ConfigEntry<bool> bRunInBackground;
     public static ConfigEntry<EButtonPrompts> iButtonPrompts;
@@ -29,7 +26,8 @@ internal class Settings
             "General",
             "RunInBackground",
             true,
-            "The game runs in the background by default.\nYou can disable this if you wish."
+            "The game runs in the background by default.\n" +
+            "You can disable this if you want the game to pause when unfocused."
         );
 
         iButtonPrompts = Plugin.Config.Bind(
@@ -41,17 +39,17 @@ internal class Settings
 
         // SkipIntro
         bSkipLogos = Plugin.Config.Bind(
-            "SkipIntro",
+            "General",
             "SkipLogos",
             false,
             "Skip intro logos."
         );
 
         bSkipOpeningMovie = Plugin.Config.Bind(
-            "SkipIntro",
+            "General",
             "SkipOpeningMovie",
             false,
-            "Skip intro opening movie."
+            "Skip the opening movie."
         );
 
         // Graphics
@@ -79,7 +77,7 @@ internal class Settings
         iPostProcessAA = Plugin.Config.Bind(
             "Graphics",
             "PostProcessAA",
-            EPostProcessAA.None,
+            EPostProcessAA.SMAA,
             "Post-process anti-aliasing method to use.\n" +
             "By default, the game only uses MSAA, which can be configured in the menu. This setting will add a post-processing method on top of MSAA.\n" +
             "FXAA removes more jagged edges, but it is slightly more blurry.\n" +
@@ -90,20 +88,20 @@ internal class Settings
             "Graphics",
             "DisableVignette",
             false,
-            "Disable vignette effect.\n" +
+            "Disable the vignette effect.\n" +
             "Vignette is a visual effect that darkens the corners of the screen."
         );
 
         fFieldGrassCullingDistance = Plugin.Config.Bind(
             "Graphics",
             "FieldGrassCullingDistance",
-            0f,
+            300f,
             new ConfigDescription(
                 "Set the field bushes and plants culling distance.\n" +
                 "The game uses a very low value, around 15 to 50 meters. This causes vegetation objects such as bushes and plants to disappear very close to the camera.\n" +
                 "I recommend leaving the value at 300. In my tests, this was more than enough to stop objects from popping in.\n" +
                 "Don't forget to set the 'Cull Distance' option in the game to 'Farthest' for the best experience.\n" +
-                "This setting does not affect the terrain grass, which fade away smoothly as you walk away.\n" +
+                "This setting does not affect the terrain grass, which fades in smoothly as you walk.\n" +
                 "Using a high value may impact performance depending on your configuration.\n" +
                 "Setting this to '0' will use the game setting.",
             new AcceptableValueRange<float>(0f, 1000f))
@@ -112,17 +110,17 @@ internal class Settings
         iShadowDistanceMultiplier = Plugin.Config.Bind(
             "Graphics",
             "ShadowDistanceMultiplier",
-            1,
+            4,
             new ConfigDescription(
-                "Set the general shadow draw distance and enables 4 shadow cascades.\n" +
-                "The rendering distance for shadows in the game is quite low, around 35 to 50 meters. This causes an effect similar to mesh swap pop-in, as objects stop to render shadows depending on distance.\n" +
+                "Set the general shadow draw distance.\n" +
+                "The rendering distance for shadows in the game is quite low, around 35 to 50 meters. This causes an effect similar to mesh swap pop-in, as objects stop rendering shadows depending on distance.\n" +
                 "I recommend leaving the multiplier at 4.\n" +
                 "At 2x, shadows will be sharper up close, but it doesn't cover a large area.\n" +
-                "At 4x, you get a smoother result, but it covers a large area. I think it's worth the tradeoff.\n" +
-                "Don't forget to set the 'Shadow Quality' option in the game to 'Ultra' and tweak the 'FieldGrassCullingDistance' setting for the best experience.\n" +
+                "At 4x, you get a smoother result, and it covers a larger area. I think it's worth the tradeoff.\n" +
+                "Don't forget to set the 'Shadow Quality' option in the game to 'Ultra' for the best experience.\n" +
                 "May impact performance depending on your configuration.\n" +
                 "Setting this to '1' will use the game setting.",
-            new AcceptableValueRange<int>(1, MaxShadowDistanceMultiplier))
+            new AcceptableValueRange<int>(1, 4))
         );
 
         Plugin.Log.LogInfo("------------------------");
