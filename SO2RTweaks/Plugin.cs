@@ -8,107 +8,106 @@ using BepInEx.Configuration;
 using UnityEngine.SceneManagement;
 using static Settings;
 
-namespace SO2RTweaks
+namespace SO2RTweaks;
+
+[BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
+public class Plugin : BasePlugin
 {
-    [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
-    public class Plugin : BasePlugin
+    // Instances
+    internal static new ManualLogSource Log;
+    internal static new ConfigFile Config;
+    internal static Harmony HarmonyInstance;
+
+    // States
+    internal static bool IsSceneTransitioning { get; private set; } = false;
+
+    public override void Load()
     {
-        // Instances
-        internal static new ManualLogSource Log;
-        internal static new ConfigFile Config;
-        internal static Harmony HarmonyInstance;
+        // Globals
+        Log = base.Log;
+        Config = base.Config;
+        HarmonyInstance = new(MyPluginInfo.PLUGIN_GUID);
 
-        // States
-        internal static bool IsSceneTransitioning { get; private set; } = false;
+        Log.LogInfo($"{MyPluginInfo.PLUGIN_NAME} loaded.");
 
-        public override void Load()
+        // Settings
+        Settings.Load();
+
+        // Register events
+        SceneManager.sceneLoaded += (Action<Scene, LoadSceneMode>)OnSceneLoaded;
+        SceneManager.sceneUnloaded += (Action<Scene>)OnSceneUnloaded;
+
+        if (!bRunInBackground.Value)
         {
-            // Globals
-            Log = base.Log;
-            Config = base.Config;
-            HarmonyInstance = new(MyPluginInfo.PLUGIN_GUID);
+            Application.runInBackground = false;
 
-            Log.LogInfo($"{MyPluginInfo.PLUGIN_NAME} loaded.");
-
-            // Settings
-            Settings.Load();
-
-            // Register events
-            SceneManager.sceneLoaded += (Action<Scene, LoadSceneMode>)OnSceneLoaded;
-            SceneManager.sceneUnloaded += (Action<Scene>)OnSceneUnloaded;
-
-            if (!bRunInBackground.Value)
-            {
-                Application.runInBackground = false;
-
-                Log.LogInfo($"Application run in background disabled.");
-            }
-
-            if (iAnisotropicFiltering.Value > 0)
-            {
-                QualitySettings.anisotropicFiltering = AnisotropicFiltering.ForceEnable;
-
-                Texture.SetGlobalAnisotropicFilteringLimits(iAnisotropicFiltering.Value, iAnisotropicFiltering.Value);
-
-                Log.LogInfo($"Anisotropic filtering set to {iAnisotropicFiltering.Value}x ({QualitySettings.anisotropicFiltering}).");
-            }
-
-            // Patches
-            if (bSkipLogos.Value || bSkipOpeningMovie.Value)
-            {
-                HarmonyInstance.PatchAll(typeof(Patches.SkipIntroPatch));
-
-                Log.LogInfo("Applied skip intro patch.");
-            }
-
-            if (iButtonPrompts.Value != EButtonPrompts.Auto)
-            {
-                HarmonyInstance.PatchAll(typeof(Patches.ButtonPromptsPatch));
-
-                Log.LogInfo("Applied button prompts patch.");
-            }
-
-            if (iFrameRateLimit.Value >= 0)
-            {
-                HarmonyInstance.PatchAll(typeof(Patches.FrameRateLimitPatch));
-
-                _ = Patches.FrameRateLimitPatch.SetFrameRateLimitAsync();
-
-                Log.LogInfo("Applied framerate limit patch.");
-            }
-
-            if (iPostProcessAA.Value != EPostProcessAA.None)
-            {
-                HarmonyInstance.PatchAll(typeof(Patches.PostProcessAAPatch));
-
-                Log.LogInfo("Applied post-process anti-aliasing patch.");
-            }
-
-            if (bDisableVignette.Value)
-            {
-                HarmonyInstance.PatchAll(typeof(Patches.DisableVignettePatch));
-
-                Log.LogInfo("Applied disable vignette patch.");
-            }
-
-            if (fFieldGrassCullingDistance.Value > 0f)
-            {
-                HarmonyInstance.PatchAll(typeof(Patches.FieldGrassCullingPatch));
-
-                Log.LogInfo("Applied field grass culling patch.");
-            }
-
-            if (iShadowDistanceMultiplier.Value > 1)
-            {
-                HarmonyInstance.PatchAll(typeof(Patches.ShadowDistancePatch));
-
-                Log.LogInfo("Applied shadow distance patch.");
-            }
+            Log.LogInfo($"Application run in background disabled.");
         }
 
-        // Events
-        private static void OnSceneLoaded(Scene scene, LoadSceneMode mode) => IsSceneTransitioning = false;
+        if (iAnisotropicFiltering.Value > 0)
+        {
+            QualitySettings.anisotropicFiltering = AnisotropicFiltering.ForceEnable;
 
-        private static void OnSceneUnloaded(Scene scene) => IsSceneTransitioning = true;
+            Texture.SetGlobalAnisotropicFilteringLimits(iAnisotropicFiltering.Value, iAnisotropicFiltering.Value);
+
+            Log.LogInfo($"Anisotropic filtering set to {iAnisotropicFiltering.Value}x ({QualitySettings.anisotropicFiltering}).");
+        }
+
+        // Patches
+        if (bSkipLogos.Value || bSkipOpeningMovie.Value)
+        {
+            HarmonyInstance.PatchAll(typeof(Patches.SkipIntroPatch));
+
+            Log.LogInfo("Applied skip intro patch.");
+        }
+
+        if (iButtonPrompts.Value != EButtonPrompts.Auto)
+        {
+            HarmonyInstance.PatchAll(typeof(Patches.ButtonPromptsPatch));
+
+            Log.LogInfo("Applied button prompts patch.");
+        }
+
+        if (iFrameRateLimit.Value >= 0)
+        {
+            HarmonyInstance.PatchAll(typeof(Patches.FrameRateLimitPatch));
+
+            _ = Patches.FrameRateLimitPatch.SetFrameRateLimitAsync();
+
+            Log.LogInfo("Applied framerate limit patch.");
+        }
+
+        if (iPostProcessAA.Value != EPostProcessAA.None)
+        {
+            HarmonyInstance.PatchAll(typeof(Patches.PostProcessAAPatch));
+
+            Log.LogInfo("Applied post-process anti-aliasing patch.");
+        }
+
+        if (bDisableVignette.Value)
+        {
+            HarmonyInstance.PatchAll(typeof(Patches.DisableVignettePatch));
+
+            Log.LogInfo("Applied disable vignette patch.");
+        }
+
+        if (fFieldGrassCullingDistance.Value > 0f)
+        {
+            HarmonyInstance.PatchAll(typeof(Patches.FieldGrassCullingPatch));
+
+            Log.LogInfo("Applied field grass culling patch.");
+        }
+
+        if (iShadowDistanceMultiplier.Value > 1)
+        {
+            HarmonyInstance.PatchAll(typeof(Patches.ShadowDistancePatch));
+
+            Log.LogInfo("Applied shadow distance patch.");
+        }
     }
+
+    // Events
+    private static void OnSceneLoaded(Scene scene, LoadSceneMode mode) => IsSceneTransitioning = false;
+
+    private static void OnSceneUnloaded(Scene scene) => IsSceneTransitioning = true;
 }

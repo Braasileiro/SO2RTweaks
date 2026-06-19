@@ -4,57 +4,56 @@ using UnityEngine;
 using System.Threading.Tasks;
 using static Settings;
 
-namespace SO2RTweaks.Patches
+namespace SO2RTweaks.Patches;
+
+internal class FrameRateLimitPatch
 {
-    internal class FrameRateLimitPatch
+    private static volatile bool bGetFrameRateInitialized = false;
+
+    [HarmonyPatch(typeof(SystemConfigParameter), nameof(SystemConfigParameter.GetFrameRate))]
+    [HarmonyPostfix]
+    public static void GetFrameRate()
     {
-        private static volatile bool bGetFrameRateInitialized = false;
-
-        [HarmonyPatch(typeof(SystemConfigParameter), nameof(SystemConfigParameter.GetFrameRate))]
-        [HarmonyPostfix]
-        public static void GetFrameRate()
+        if (!bGetFrameRateInitialized)
         {
-            if (!bGetFrameRateInitialized)
-            {
-                bGetFrameRateInitialized = true;
-            }
-            else
-            {
-                Application.targetFrameRate = iFrameRateLimit.Value;
-            }
+            bGetFrameRateInitialized = true;
         }
-
-        [HarmonyPatch(typeof(SystemConfigParameter), nameof(SystemConfigParameter.SetFrameRate))]
-        [HarmonyPostfix]
-        public static void SetFrameRate()
+        else
         {
             Application.targetFrameRate = iFrameRateLimit.Value;
         }
+    }
 
-        [HarmonyPatch(typeof(GameManager), nameof(GameManager.ChangeFrameRate))]
-        [HarmonyPostfix]
-        public static void ChangeFrameRate()
+    [HarmonyPatch(typeof(SystemConfigParameter), nameof(SystemConfigParameter.SetFrameRate))]
+    [HarmonyPostfix]
+    public static void SetFrameRate()
+    {
+        Application.targetFrameRate = iFrameRateLimit.Value;
+    }
+
+    [HarmonyPatch(typeof(GameManager), nameof(GameManager.ChangeFrameRate))]
+    [HarmonyPostfix]
+    public static void ChangeFrameRate()
+    {
+        Application.targetFrameRate = iFrameRateLimit.Value;
+    }
+
+    public static async Task SetFrameRateLimitAsync()
+    {
+        while (!bGetFrameRateInitialized)
         {
-            Application.targetFrameRate = iFrameRateLimit.Value;
+            await Task.Delay(100);
         }
 
-        public static async Task SetFrameRateLimitAsync()
+        Application.targetFrameRate = iFrameRateLimit.Value;
+
+        if (Application.targetFrameRate == 0)
         {
-            while (!bGetFrameRateInitialized)
-            {
-                await Task.Delay(100);
-            }
-
-            Application.targetFrameRate = iFrameRateLimit.Value;
-
-            if (Application.targetFrameRate == 0)
-            {
-                Plugin.Log.LogInfo($"Application target framerate set to 0 (Unlimited).");
-            }
-            else
-            {
-                Plugin.Log.LogInfo($"Application target framerate set to {Application.targetFrameRate}.");
-            }
+            Plugin.Log.LogInfo($"Application target framerate set to 0 (Unlimited).");
+        }
+        else
+        {
+            Plugin.Log.LogInfo($"Application target framerate set to {Application.targetFrameRate}.");
         }
     }
 }

@@ -3,69 +3,68 @@ using Common;
 using HarmonyLib;
 using static Settings;
 
-namespace SO2RTweaks.Patches
+namespace SO2RTweaks.Patches;
+
+internal class SkipIntroPatch
 {
-    internal class SkipIntroPatch
+    private static bool bSkippedIntroLogos = false;
+    private static bool bSkippedIntroOpeningMovie = false;
+    private static bool bSkippedTitlePresenter = false;
+
+    [HarmonyPatch(typeof(GameSceneManager), nameof(GameSceneManager.CreateNextScene))]
+    [HarmonyPrefix]
+    public static void CreateNextScene(ref SceneType sceneType)
     {
-        private static bool bSkippedIntroLogos = false;
-        private static bool bSkippedIntroOpeningMovie = false;
-        private static bool bSkippedTitlePresenter = false;
-
-        [HarmonyPatch(typeof(GameSceneManager), nameof(GameSceneManager.CreateNextScene))]
-        [HarmonyPrefix]
-        public static void CreateNextScene(ref SceneType sceneType)
+        if (sceneType == SceneType.Logo)
         {
-            if (sceneType == SceneType.Logo)
+            if (bSkipLogos.Value && !bSkippedIntroLogos)
             {
-                if (bSkipLogos.Value && !bSkippedIntroLogos)
+                if (bSkipOpeningMovie.Value)
                 {
-                    if (bSkipOpeningMovie.Value)
-                    {
-                        // Logos + Opening Movie
-                        sceneType = SceneType.Title;
-
-                        bSkippedIntroOpeningMovie = true;
-
-                        Plugin.Log.LogInfo("Skipped logos and opening movie.");
-                    }
-                    else
-                    {
-                        // Only Logos
-                        sceneType = SceneType.OpeningMovie;
-
-                        Plugin.Log.LogInfo("Skipped logos.");
-                    }
-
-                    bSkippedIntroLogos = true;
-                }
-            }
-            else if (sceneType == SceneType.OpeningMovie)
-            {
-                if (bSkipOpeningMovie.Value && !bSkippedIntroOpeningMovie)
-                {
-                    // Only Opening Movie
+                    // Logos + Opening Movie
                     sceneType = SceneType.Title;
 
                     bSkippedIntroOpeningMovie = true;
 
-                    Plugin.Log.LogInfo("Skipped opening movie.");
+                    Plugin.Log.LogInfo("Skipped logos and opening movie.");
                 }
+                else
+                {
+                    // Only Logos
+                    sceneType = SceneType.OpeningMovie;
+
+                    Plugin.Log.LogInfo("Skipped logos.");
+                }
+
+                bSkippedIntroLogos = true;
             }
         }
-
-        [HarmonyPatch(typeof(UITitlePressAnyButtonSelector), nameof(UITitlePressAnyButtonSelector.Show))]
-        [HarmonyPostfix]
-        public static void PressAnyButtonSelectorShow(ref UITitlePressAnyButtonSelector __instance)
+        else if (sceneType == SceneType.OpeningMovie)
         {
-            if (bSkipOpeningMovie.Value && !bSkippedTitlePresenter)
+            if (bSkipOpeningMovie.Value && !bSkippedIntroOpeningMovie)
             {
-                // Skip the short title animation on press any button screen
-                __instance.titlePresenter.Skip();
+                // Only Opening Movie
+                sceneType = SceneType.Title;
 
-                bSkippedTitlePresenter = true;
+                bSkippedIntroOpeningMovie = true;
 
-                Plugin.Log.LogInfo("Skipped the short title animation.");
+                Plugin.Log.LogInfo("Skipped opening movie.");
             }
+        }
+    }
+
+    [HarmonyPatch(typeof(UITitlePressAnyButtonSelector), nameof(UITitlePressAnyButtonSelector.Show))]
+    [HarmonyPostfix]
+    public static void PressAnyButtonSelectorShow(ref UITitlePressAnyButtonSelector __instance)
+    {
+        if (bSkipOpeningMovie.Value && !bSkippedTitlePresenter)
+        {
+            // Skip the short title animation on press any button screen
+            __instance.titlePresenter.Skip();
+
+            bSkippedTitlePresenter = true;
+
+            Plugin.Log.LogInfo("Skipped the short title animation.");
         }
     }
 }

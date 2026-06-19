@@ -2,22 +2,21 @@ using HarmonyLib;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
-namespace SO2RTweaks.Patches
+namespace SO2RTweaks.Patches;
+
+internal class DisableVignettePatch
 {
-    internal class DisableVignettePatch
+    [HarmonyPatch(typeof(Volume), nameof(Volume.OnEnable))]
+    [HarmonyPostfix]
+    public static void OnEnable(Volume __instance)
     {
-        [HarmonyPatch(typeof(Volume), nameof(Volume.OnEnable))]
-        [HarmonyPostfix]
-        public static void OnEnable(Volume __instance)
+        __instance.profile.TryGet(out Vignette vignette);
+
+        if (vignette)
         {
-            __instance.profile.TryGet(out Vignette vignette);
+            vignette.active = false;
 
-            if (vignette)
-            {
-                vignette.active = false;
-
-                Plugin.Log.LogDebug($"Disbabled vignette on game object '{__instance.gameObject.name}'.");
-            }
+            Plugin.Log.LogDebug($"Disbabled vignette on game object '{__instance.gameObject.name}'.");
         }
     }
 }
